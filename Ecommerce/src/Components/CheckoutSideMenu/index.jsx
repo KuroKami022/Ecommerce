@@ -4,7 +4,7 @@ import { XMarkIcon } from '@heroicons/react/24/solid'
 import { ShoppingCartContext } from '../../Context'
 import OrderCard from '../../Components/OrderCard'
 import { totalPrice } from '../../Utils'
-import './CheckoutSideMenu.css'
+import './styles.css'
 
 const CheckoutSideMenu = () => {
   const context = useContext(ShoppingCartContext)
