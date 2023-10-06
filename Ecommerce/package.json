@@ -4,11 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "predeploy": "npm run build",
-    "deploy": "gh-pages-clean gh-pages -d build",
-    "start": "react-scripts start",
-    "eject": "react-scripts eject",
-    "build:css": "postcss src/styles/tailwind.scss -o src/styles/index.scss",
+    "deploy": "gh-pages -d src",
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
