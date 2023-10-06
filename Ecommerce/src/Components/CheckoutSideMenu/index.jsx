@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom'
 import { XMarkIcon } from '@heroicons/react/24/solid'
 import { ShoppingCartContext } from '../../Context'
 import OrderCard from '../../Components/OrderCard'
-import { totalPrice } from '../../Utils'
+import { totalPrice } from '../../utils'
 import './styles.css'
 
 const CheckoutSideMenu = () => {
@@ -24,6 +24,7 @@ const CheckoutSideMenu = () => {
 
     context.setOrder([...context.order, orderToAdd])
     context.setCartProducts([])
+    context.setSearchByTitle(null)
   }
 
   return (
@@ -57,7 +58,7 @@ const CheckoutSideMenu = () => {
           <span className='font-medium text-2xl'>${totalPrice(context.cartProducts)}</span>
         </p>
         <Link to='/my-orders/last'>
-        <button className='bg-black py-3 text-white w-full rounded-lg' onClick={() => handleCheckout()}>Checkout</button>
+          <button className='bg-black py-3 text-white w-full rounded-lg' onClick={() => handleCheckout()}>Checkout</button>
         </Link>
       </div>
     </aside>

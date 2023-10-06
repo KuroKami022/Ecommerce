@@ -49,8 +49,8 @@ export const ShoppingCartProvider = ({children}) => {
     return items?.filter(item => item.category.name.toLowerCase().includes(searchByCategory.toLowerCase()))
   }
 
-  const filterBy = (searchType, items, searchByTitle) => {
-    if (searchType === 'BY_TYTLE') {
+  const filterBy = (searchType, items, searchByTitle, searchByCategory) => {
+    if (searchType === 'BY_TITLE') {
       return filteredItemsByTitle(items, searchByTitle)
     }
 
@@ -58,7 +58,7 @@ export const ShoppingCartProvider = ({children}) => {
       return filteredItemsByCategory(items, searchByCategory)
     }
 
-    if (searchType === 'BY_TYTLE_AND_CATEGORY') {
+    if (searchType === 'BY_TITLE_AND_CATEGORY') {
       return filteredItemsByCategory(items, searchByCategory).filter(item => item.title.toLowerCase().includes(searchByTitle.toLowerCase()))
     }
 
@@ -68,10 +68,10 @@ export const ShoppingCartProvider = ({children}) => {
   }
 
   useEffect(() => {
-    if (searchByTitle && !searchByCategory) setFilteredItems(filterBy('BY_TYTLE', items, searchByTitle))
-    if (!searchByTitle && searchByCategory) setFilteredItems(filterBy('BY_CATEGORY', items, searchByTitle))
-    if (!searchByTitle && !searchByCategory) setFilteredItems(filterBy('null', items, searchByTitle))
-    if (searchByTitle && searchByCategory) setFilteredItems(filterBy('BY_TYTLE_AND_CATEGORY', items, searchByTitle))
+    if (searchByTitle && searchByCategory) setFilteredItems(filterBy('BY_TITLE_AND_CATEGORY', items, searchByTitle, searchByCategory))
+    if (searchByTitle && !searchByCategory) setFilteredItems(filterBy('BY_TITLE', items, searchByTitle, searchByCategory))
+    if (!searchByTitle && searchByCategory) setFilteredItems(filterBy('BY_CATEGORY', items, searchByTitle, searchByCategory))
+    if (!searchByTitle && !searchByCategory) setFilteredItems(filterBy(null, items, searchByTitle, searchByCategory))
   }, [items, searchByTitle, searchByCategory])
 
   return (
@@ -95,8 +95,8 @@ export const ShoppingCartProvider = ({children}) => {
       searchByTitle,
       setSearchByTitle,
       filteredItems,
-      setSearchByCategory,
-      searchByCategory
+      searchByCategory,
+      setSearchByCategory
     }}>
       {children}
     </ShoppingCartContext.Provider>
